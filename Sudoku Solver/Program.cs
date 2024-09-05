@@ -3,7 +3,7 @@ using Sudoku_Solver.Classes;
 bool Start = false;
 int ProcessIdentifier = 100;
 Console.WriteLine("Input Value for Operation\n[0] Input Sudoku \n[1] Generate Sudoku");
-while (Start == false) // Force
+while (Start == false) // Force User to Select A Process
 {
     var userinput = Console.ReadLine();
     if (userinput != null) 
@@ -11,14 +11,15 @@ while (Start == false) // Force
         if (v==true)
         {
             Start = true;
+            ProcessIdentifier = Convert.ToInt16(userinput);
         }
         else
         {
-            Console.WriteLine("Invalid User Input: Please Input [0] or [1]");  
+            Console.WriteLine("Invalid User Input, Try Again");
         }
     }
 }
-if (Start == true)
+if (Start == true && ProcessIdentifier == 0)
 {
-    Console.WriteLine("Start = True");
+    Console.WriteLine(ProcessIdentifier);
 }
