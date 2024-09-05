@@ -40,13 +40,18 @@ namespace Sudoku_Solver.Classes
         {
             return [1]; // Backtracking & Method From https://norvig.com/sudoku.html adapted to C#
         }
-        public static void BlankGrid()
+        public static string BlankGrid()
         {
-            // Generate Blank Grid (81 0's) (String) Recursion or Constant <Recursion is Cooler>
+            string k = "000000000000000000000000000000000000000000000000000000000000000000000000000000000";
+            return k;
+            // Generates Blank Grid (81 0's) (String)
         }
         public static void GridToArray(string k)
         {
-            // Splice Characters 1 at a time into an Int Array
+            for (int i = 0; i < k.Length; i++)
+            {
+                // Splicing 1 Character at a time
+            }
             // Return Array
         }
     }
