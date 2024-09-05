@@ -24,17 +24,17 @@ namespace Sudoku_Solver.Classes
             }
             catch {return false;}
         }
-        public static void UserSudokuInput(string k)
+        public static void UserValidSudokuInput(string k)
         {
-            // Heavily Reliant on Sudoku.GrindToArray
+            // 1. Check if String is Not Null and is 81 Characters and all Valid Integers
+            // 2. Return True/False -> True: Transfer to GridToArray False: Invalid Input
         }
     }
     internal class Sudoku
     {
-        public static int[] SudokuGenerate()
+        public static void SudokuGenerate()
         {
-            int[] ints = [1]; // Reliant on Sudoku.SudokuSolve
-            return ints;
+            // Reliant on Sudoku.SudokuSolve Randomizing a Solution from a Blank Grid, then removing random squares || possibility for difficulties later ie remove x squares = easy
         }
         public static int[] SudokuSolve(int[] puzzle)
         {
@@ -46,7 +46,8 @@ namespace Sudoku_Solver.Classes
         }
         public static void GridToArray(string k)
         {
-            // 1. Check if String is Not Null and 81 Characters, 2. Splice Characters 1 at a time into an Int Array (Checking if they are valid integers)
+            // Splice Characters 1 at a time into an Int Array
+            // Return Array
         }
     }
 }
