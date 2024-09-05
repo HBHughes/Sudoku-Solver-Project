@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Sudoku_Solver.Classes
 {
-    internal class Classes
+    internal class UI
     {
         public static bool UserValidInput(string k) 
         {
