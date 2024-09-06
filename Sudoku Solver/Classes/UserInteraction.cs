@@ -111,10 +111,6 @@ namespace Sudoku_Solver.Classes
         {
             // Reliant on Sudoku.SudokuSolve Randomizing a Solution from a Blank Grid, then removing random squares || possibility for difficulties later ie remove x squares = easy
         }
-        public static int[] SudokuSolve(int[] puzzle)
-        {
-            return [1]; // Backtracking & Method From https://norvig.com/sudoku.html adapted to C#
-        }
         public static string BlankGrid()
         {
             string k = "000000000000000000000000000000000000000000000000000000000000000000000000000000000";
