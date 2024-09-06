@@ -44,6 +44,69 @@ namespace Sudoku_Solver.Classes
     }
     internal class Sudoku
     {
+        public static bool Solve(int[,] board)
+        {
+            for (int row = 0; row < 9; row++)
+            {
+                for (int col = 0; col < 9; col++)
+                {
+                    if (board[row, col] == 0) // Find an empty cell
+                    {
+                        for (int num = 1; num <= 9; num++) // Try possible numbers
+                        {
+                            if (IsValidNum(board, row, col, num))
+                            {
+                                board[row, col] = num; // Place the number
+                                if (Solve(board)) // Recursively attempt to solve
+                                {
+                                    return true;
+                                }
+                                board[row, col] = 0; // Reset if not solved
+                            }
+                        }
+                        return false; // Return false if no number is valid
+                    }
+                }
+            }
+            return true; // Solution found
+        }
+        private static bool IsValidNum(int[,] board, int row, int col, int num)
+        {
+            // Check if num is not in the current row
+            for (int c = 0; c < 9; c++)
+            {
+                if (board[row, c] == num)
+                {
+                    return false;
+                }
+            }
+
+            // Check if num is not in the current column
+            for (int r = 0; r < 9; r++)
+            {
+                if (board[r, col] == num)
+                {
+                    return false;
+                }
+            }
+
+            // Check if num is not in the 3x3 sub-grid
+            int startRow = row - row % 3;
+            int startCol = col - col % 3;
+            for (int r = startRow; r < startRow + 3; r++)
+            {
+                for (int c = startCol; c < startCol + 3; c++)
+                {
+                    if (board[r, c] == num)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+
         public static void SudokuGenerate()
         {
             // Reliant on Sudoku.SudokuSolve Randomizing a Solution from a Blank Grid, then removing random squares || possibility for difficulties later ie remove x squares = easy
