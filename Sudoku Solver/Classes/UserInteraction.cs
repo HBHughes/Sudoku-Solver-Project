@@ -15,7 +15,7 @@ namespace Sudoku_Solver.Classes
             try
             {
               int v = Convert.ToInt32(k);
-              if (v==0 || v==1)
+              if (v==0)
                 {
                     return true;
                 }
