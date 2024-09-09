@@ -15,7 +15,7 @@ namespace Sudoku_Solver.Classes
             try
             {
               int v = Convert.ToInt32(k);
-              if (v==0 || v==1)
+              if (v==0)
                 {
                     return true;
                 }
@@ -37,7 +37,7 @@ namespace Sudoku_Solver.Classes
         }
         public static bool AllCharAreInt(string k)
         {
-            var search = @"^-?[0-9]+(?:\.[0-9]+)?$";
+            var search = @"^-?[0-9]+(?:\.[0-9]+)?$"; //Regular Expression Checking if all Characters are Integers
             var regex = new Regex(search);
             return regex.IsMatch(k);
         }   
@@ -109,7 +109,7 @@ namespace Sudoku_Solver.Classes
 
         public static void SudokuGenerate()
         {
-            // Reliant on Sudoku.SudokuSolve Randomizing a Solution from a Blank Grid, then removing random squares || possibility for difficulties later ie remove x squares = easy
+            // Leaving out for now can implement if bored
         }
         public static string BlankGrid()
         {
