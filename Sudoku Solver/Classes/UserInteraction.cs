@@ -15,7 +15,7 @@ namespace Sudoku_Solver.Classes
             try
             {
               int v = Convert.ToInt32(k);
-              if (v==0)
+              if (v==0 || v==1 || v==2)
                 {
                     return true;
                 }
@@ -44,7 +44,10 @@ namespace Sudoku_Solver.Classes
     }
     internal class Sudoku
     {
-        public static bool Solve(int[,] board)
+        private const int Size = 9;
+        private int[,] board = new int[Size, Size];
+        private Random rand = new Random();
+        public static bool Solve(int[,] board) // Backtracking & Method From https://norvig.com/sudoku.html adapted to C#
         {
             for (int row = 0; row < 9; row++)
             {
@@ -90,7 +93,7 @@ namespace Sudoku_Solver.Classes
                 }
             }
 
-            // Check if num is not in the 3x3 sub-grid
+            // Check if num is not in the 3x3 sub-grid, looks a little awkward - might have to change a little for readability
             int startRow = row - row % 3;
             int startCol = col - col % 3;
             for (int r = startRow; r < startRow + 3; r++)
@@ -106,14 +109,64 @@ namespace Sudoku_Solver.Classes
 
             return true;
         }
-
-        public static void SudokuGenerate()
+        public int[,] GetBoard() //method to return constant board
         {
-            // Reliant on Sudoku.SudokuSolve Randomizing a Solution from a Blank Grid, then removing random squares || possibility for difficulties later ie remove x squares = easy
+            return board;
         }
-        public static int[] SudokuSolve(int[] puzzle)
+        private bool FillBoard()
         {
-            return [1]; // Backtracking & Method From https://norvig.com/sudoku.html adapted to C#
+            return FillBoard(0, 0);
+        }
+        private void GenerateBoard()
+        {
+            FillBoard();
+            RemoveNumbers();
+        }
+        private bool FillBoard(int row, int col)
+        {
+            if (row == Size)    // if row 9, true
+                return true;
+
+            if (col == Size)    // if col 9, go to next row and first col
+                return FillBoard(row + 1, 0);
+
+            if (board[row, col] != 0) //go next col
+                return FillBoard(row, col + 1);
+
+            for (int i = 1; i <= Size; i++)
+            {
+                if (IsValidNum(board, row, col, i)) //checks if current pos with num is a valid number (i); resets to 0 after
+                {
+                    board[row, col] = i;
+
+                    if (FillBoard(row, col + 1))
+                        return true;
+
+                    board[row, col] = 0;
+                }
+            }
+
+            return false;
+        }
+        private void RemoveNumbers()
+        {
+            int numberOfCellsToRemove = 30; // Adjust the number of cells to remove to create the puzzle difficulty - might have to look into some puzzle theory to improve this
+            // might need overload with extra input for cell count
+            while (numberOfCellsToRemove > 0) //iterative to randomly remove 40 cells (might be inefficient hitting cells multiple times - will have to run tests)
+            {
+                int row = rand.Next(Size);
+                int col = rand.Next(Size);
+
+                if (board[row, col] != 0)
+                {
+                    board[row, col] = 0;
+                    numberOfCellsToRemove--; 
+                }
+            }
+        }
+        public Sudoku()
+        {
+            GenerateBoard();
         }
         public static string BlankGrid()
         {
@@ -139,7 +192,7 @@ namespace Sudoku_Solver.Classes
         }
         public static void PrintBoard(int[,] board)
         {
-            int Sizerow = board.GetLength(0); //im adding this incase I want to add grids with other sizes (might not be possible need to work on algorithm)
+            int Sizerow = board.GetLength(0); // probably unneccesary but its fine
             int Sizecol = board.GetLength(1); 
             for (int i = 0; i < Sizerow; i++)
             {

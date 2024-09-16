@@ -2,7 +2,7 @@
 using Sudoku_Solver.Classes;
 bool Start = false;
 int ProcessIdentifier = 1000;
-Console.WriteLine("Input Value for Operation\n[0] Input Sudoku \n[1] Generate Sudoku");
+Console.WriteLine("Input Value for Operation\n[0] Input Sudoku\n[1] Generate Sudoku\n[2] Generate and Solve");
 while (Start == false) // Force User to Select A Process note: There may be a more efficient console application but I'm going to leave this until I implement this into a website.
 {
     string? userinput = Console.ReadLine();
@@ -34,4 +34,19 @@ if (Start == true && ProcessIdentifier == 0)
         }
     }
     else { Console.WriteLine("Invalid User Input"); }
+}
+if (Start == true && ProcessIdentifier  == 1)
+{
+    Sudoku generator = new Sudoku();
+    int[,] board = generator.GetBoard();
+    Sudoku.PrintBoard(board);
+}
+if (Start == true && ProcessIdentifier == 2)
+{
+    Sudoku generator = new Sudoku();
+    int[,] board = generator.GetBoard();
+    Sudoku.PrintBoard(board);
+    Console.WriteLine("\n");
+    Sudoku.Solve(board);
+    Sudoku.PrintBoard(board);
 }
