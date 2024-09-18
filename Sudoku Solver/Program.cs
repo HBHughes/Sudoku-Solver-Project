@@ -1,7 +1,7 @@
 ﻿using Sudoku_Solver.Classes;
 bool Start = false;
 int ProcessIdentifier = 1000;
-Console.WriteLine("Input Value for Operation\n[0] Input Sudoku\n[1] Generate Sudoku\n[2] Generate and Solve\n[3] Time Test\n[4] Repetition Test");
+Console.WriteLine("Input Value for Operation\n[0] Input Sudoku\n[1] Generate Sudoku\n[2] Generate and Solve\n[3] Time Test (1 Repetition)\n[4] Repetition Test (100,000)");
 while (Start == false) // Force User to Select A Process note: There may be a more efficient console application but I'm going to leave this until I implement this into a website.
 {
     string? userinput = Console.ReadLine();
@@ -66,16 +66,13 @@ if (Start == true)
     }
     if (ProcessIdentifier == 4)
     {
-        int repetitions = 1000;
+        int repetitions = 100000;
         double totalms = 0;
         for (int i = 0; i < repetitions; i++) {
             var watch = System.Diagnostics.Stopwatch.StartNew();
             Sudoku generator = new Sudoku();
             int[,] board = generator.GetBoard();
-            Sudoku.PrintBoard(board);
-            Console.WriteLine("\n");
             Sudoku.Solve(board);
-            Sudoku.PrintBoard(board);
             watch.Stop();
             long elapsedMs = watch.ElapsedMilliseconds;
             totalms = totalms + Convert.ToDouble(elapsedMs);
