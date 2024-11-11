@@ -1,7 +1,7 @@
 ﻿using Sudoku_Solver.Classes;
 bool Start = false;
 int ProcessIdentifier = 1000;
-Console.WriteLine("Input Value for Operation\n[0] Input Sudoku\n[1] Generate Sudoku\n[2] Generate and Solve\n[3] Time Test (1 Repetition)\n[4] Repetition Test (100,000)");
+Console.WriteLine("Input Value for Operation\n[0] Input Sudoku\n[1] Generate Sudoku (NYI) \n[2] Generate and Solve (NYI) \n[3] Time Test (1 Repetition)\n[4] Repetition Test (100,000)");
 while (Start == false) // Force User to Select A Process note: There may be a more efficient console application but I'm going to leave this until I implement this into a website.
 {
     string? userinput = Console.ReadLine();
